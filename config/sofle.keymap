@@ -17,6 +17,18 @@
 
 / {
 
+    behaviors {
+        lt_mo_kp: layer_tap_momentary_keypress {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_MOMENTARY_KEYPRESS";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            flavor = "hold-preferred";
+            bindings = <&mo>, <&kp>;
+        };
+    };
+
    // Activate ADJUST layer by pressing raise and lower
     conditional_layers {
         compatible = "zmk,conditional-layers";
