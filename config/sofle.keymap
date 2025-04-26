@@ -80,7 +80,9 @@
                         &kp LGUI  &kp LEFT_GUI  &mt LEFT_ALT SPACE  &mo1_fn  &kp RET       &mt NON_US_BACKSLASH MINUS  &mo2_fn  &kp EQUAL  &kp LEFT   &kp RIGHT
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings =
+                <&inc_dec_kp TAB LS(TAB)>,
+                <&inc_dec_kp PG_UP PG_DN>;
         };
 
         lower_layer {
