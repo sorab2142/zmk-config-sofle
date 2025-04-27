@@ -86,19 +86,6 @@
             label = "MO2_F15";
         };
 
-        // parameterized version of mo1_f14
-        macro_with_layer_fkey: macro_with_layer_fkey {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <2>;  // Now accepts two parameters: layer and function key
-            bindings = 
-                <&macro_press>,
-                <&mo MACRO_PARAM_1 &kp MACRO_PARAM_2>,  // MACRO_PARAM_1 = layer, MACRO_PARAM_2 = function key
-                <&macro_pause_for_release>,
-                <&macro_release>,
-                <&mo MACRO_PARAM_1 &kp MACRO_PARAM_2>;
-
-            label = "MACRO_WITH_LAYER_FKEY";
-        };
     };
 
     behaviors {
@@ -123,17 +110,6 @@
             global-quick-tap;
             bindings = <&mo2_f15_macro>, <&kp>;  // Hold: macro, Tap: keypress
         };
-
-        lt_layer_macro: layer_tap_macro {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LT_LAYER_MACRO";
-            #binding-cells = <3>;  // Now accepts: layer, function key, and tap key
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <125>;
-            global-quick-tap;
-            bindings = <&macro_with_layer_fkey>, <&kp>;  // Hold: macro with params, Tap: keypress
-        };
     };
 
     keymap {
@@ -154,7 +130,7 @@
 &kp TAB         &kp Q   &kp W     &kp E         &kp R               &kp T                                              &kp Y    &kp U      &kp I      &kp O      &kp P     &kp LEFT_BRACKET
 &kp LEFT_SHIFT  &kp A   &kp S     &kp D         &kp F               &kp G                                              &kp H    &kp J      &kp K      &kp L      &kp SEMI  &mt RIGHT_SHIFT SINGLE_QUOTE
 &kp LCTRL       &kp Z   &kp X     &kp C         &kp V               &kp B    &kp C_MUTE    &kp K_PLAY_PAUSE            &kp N    &kp M      &kp COMMA  &kp DOT    &kp FSLH  &mt RCTRL RIGHT_BRACKET
-                        &kp LGUI  &kp LEFT_GUI  &mt LEFT_ALT SPACE  &lt_layer_macro LOWER F14 SPACE  &kp RET       &mt BACKSLASH MINUS &lt_layer_macro RAISE F15 SPACE  &kp EQUAL  &kp LEFT   &kp RIGHT
+                        &kp LGUI  &kp LEFT_GUI  &mt LEFT_ALT SPACE  &lt1_space_macro 0 SPACE  &kp RET       &mt BACKSLASH MINUS &lt2_space_macro 0 SPACE  &kp EQUAL  &kp LEFT   &kp RIGHT
             >;
 
             sensor-bindings =
