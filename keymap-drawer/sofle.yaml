@@ -54,10 +54,10 @@ layers:
   - LGUI
   - LEFT GUI
   - {t: SPACE, h: LEFT ALT}
-  - {t: SPACE, h: '&mo1_f14_macro'}
+  - '&lt_layer_macro 1 F14 SPACE'
   - RET
   - {t: '-', h: \}
-  - {t: SPACE, h: '&mo2_f15_macro'}
+  - '&lt_layer_macro 2 F15 SPACE'
   - '='
   - LEFT
   - RIGHT
