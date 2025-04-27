@@ -69,7 +69,7 @@
                 <&macro_release>,
                 <&mo LOWER &kp F14>;
 
-            label = "MO1_F14"
+            label = "MO1_F14";
         };
 
         mo2_f15_macro: mo2_f15_macro {
@@ -81,7 +81,7 @@
                 <&macro_release>,
                 <&mo RAISE &kp F15>;
 
-            label = "MO2_F15"
+            label = "MO2_F15";
         };
 
     };
