@@ -105,12 +105,12 @@
 
         From: https://github.com/urob/zmk-config/
         */
-        smart_shift: smart_shift {
-            compatible = "zmk,behavior-mod-morph";
-            bindings = <&sk LSHFT>, <&caps_word>;
-            mods = <(MOD_LSFT)>;
-            #binding-cells = <0>;
-        };
+        // smart_shift: smart_shift {
+        //     compatible = "zmk,behavior-mod-morph";
+        //     bindings = <&sk LSHFT>, <&caps_word>;
+        //     mods = <(MOD_LSFT)>;
+        //     #binding-cells = <0>;
+        // };
 
     };
 
