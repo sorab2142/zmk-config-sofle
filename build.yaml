@@ -22,6 +22,8 @@ include:
   - board: nice_nano_v2
     shield: sofle_left
     snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    #cmake-args: -DCONFIG_ZMK_STUDIO=y        // Uncomment this line when building natively
+    #artifact-name: sofle_left_with_studio    // Uncomment this line when building natively
   - board: nice_nano_v2
     shield: sofle_right
+    #artifact-name: sofle_right               // Uncomment this line when building natively
