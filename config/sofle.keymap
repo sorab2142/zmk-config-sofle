@@ -59,7 +59,7 @@
     };
 
     behaviors {
-        lt2_sp: layer1_tap_space_macro {
+        lt1_sp: layer1_tap_space_macro {
             compatible = "zmk,behavior-hold-tap";
             label = "LT1_SPACE_MACRO";
             #binding-cells = <2>;
