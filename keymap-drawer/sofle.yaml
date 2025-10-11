@@ -1,7 +1,7 @@
 layout: {zmk_keyboard: sofle}
 layers:
   default:
-  - ESCAPE
+  - {t: ESC, s: '`'}
   - '1'
   - '2'
   - '3'
@@ -13,7 +13,7 @@ layers:
   - '9'
   - '0'
   - {t: BACKSPACE, s: DELETE}
-  - TAB
+  - {t: TAB, h: CAPS}
   - Q
   - W
   - E
@@ -25,7 +25,7 @@ layers:
   - O
   - P
   - '['
-  - '&td_mt'
+  - {t: LSHFT, h: sticky}
   - A
   - S
   - D
@@ -36,35 +36,94 @@ layers:
   - K
   - L
   - ;
-  - {t: '''', h: RIGHT SHIFT}
+  - {t: '''', h: RSHFT}
   - LCTRL
   - Z
   - X
   - C
   - V
   - B
-  - MUTE
-  - PLAY PAUSE
+  - CAPS
+  - PP
   - N
   - M
   - ','
-  - .
-  - /
+  - {t: ., h: UP}
+  - {t: /, h: DOWN}
   - {t: ']', h: RCTRL}
+  - {t: raise, h: toggle}
   - LGUI
-  - LEFT GUI
-  - {t: SPACE, h: LEFT ALT}
-  - {t: SPACE, h: '&mo1_f14_macro'}
+  - {t: SPACE, h: LALT}
+  - {t: SPACE, h: '&mo2_f15_macro'}
   - RET
-  - {t: '-', h: \}
-  - {t: RET, h: '&mo2_f15_macro'}
+  - \
+  - {t: '-', h: '&mo2_f15_macro'}
   - '='
   - LEFT
   - RIGHT
   lower: ['', F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', F12, '', '!', '@', '#', $, '%', ^, '&', '*', (,
     ), '|', '', '=', '-', +, '{', '}', '', '', '[', ']', ;, ':', \, '', '', '', '', '', '', '', '', '', '', '']
-  raise: ['', '', '', '', '', '', '', '', '', '', '', '', '', INS, PSCRN, CMENU, '', '', PG UP, HOME, UP, END, '0', '', '', LALT, LCTRL, LSHFT, '', CLCK, PG DN, LEFT,
-    DOWN, RIGHT, DEL, BSPC, '', UNDO, CUT, COPY, PASTE, '', '', '', '', Ctl+Sft+LEFT ARROW, '', Ctl+Sft+RIGHT, '', '', '', '', '', '', '', '', '', '', '', '']
+  raise:
+  - {t: default, h: toggle}
+  - F1
+  - F2
+  - F3
+  - F4
+  - F5
+  - ''
+  - Sft+HOME
+  - Alt+UP
+  - Sft+END
+  - Ctl+DEL
+  - BSPC
+  - CAPS
+  - F6
+  - F7
+  - F8
+  - F9
+  - F10
+  - PG UP
+  - HOME
+  - UP
+  - END
+  - F11
+  - F12
+  - ''
+  - LALT
+  - LCTRL
+  - LSHFT
+  - Ctl+Z
+  - Ctl+Y
+  - PG DN
+  - LEFT
+  - DOWN
+  - RIGHT
+  - DEL
+  - RSHFT
+  - ''
+  - ''
+  - Ctl+X
+  - Ctl+C
+  - Ctl+V
+  - Sft+F
+  - ''
+  - {t: default, h: toggle}
+  - Sft+H
+  - Ctl+Sft+LEFT
+  - Alt+DOWN
+  - Ctl+Sft+RIGHT
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - SPC
+  - RET
+  - RET
+  - SPC
+  - ''
+  - ''
+  - ''
   adjust:
   - BT CLR
   - {t: BT, h: '0'}
