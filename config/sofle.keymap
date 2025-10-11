@@ -28,7 +28,8 @@
     };
 
     macros {
-        // used in a hold-tap behaviour below to send a normal key when tapped 
+        // used in a hold-tap behaviour below 
+        // to send a normal key when tapped 
         // but sends this macro on hold
         mo1_f14_macro: mo1_f14_macro {
             compatible = "zmk,behavior-macro";
@@ -56,6 +57,29 @@
             label = "MO2_F15";
         };
 
+        mo1_f14_toggle: mo1_f14_toggle {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = 
+                <&macro_press &mo LOWER>,
+                <&macro_tap &kp F14>,
+                <&macro_pause_for_release>,
+                <&macro_release &mo LOWER>,
+                <&macro_tap &kp F14>;
+            label = "MO1_F14_toggle";
+        };
+
+        mo2_f15_toggle: mo2_f15_toggle {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = 
+                <&macro_press &mo RAISE>,
+                <&macro_tap &kp F15>,
+                <&macro_pause_for_release>,
+                <&macro_release &mo RAISE>,
+                <&macro_tap &kp F15>;
+            label = "MO2_F15_toggle";
+        };
     };
 
     behaviors {
@@ -74,11 +98,11 @@
             compatible = "zmk,behavior-hold-tap";
             label = "LT2_SPACE_MACRO";
             #binding-cells = <2>;
-            flavor = "tap-preferred";     // Prioritize tap for quick presses
-            tapping-term-ms = <200>;      // 200ms threshold for tap vs. hold
-            quick-tap-ms = <125>;         // Prevent hold on fast double-taps
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
             global-quick-tap;
-            bindings = <&mo2_f15_macro>, <&kp>;  // Hold: macro, Tap: keypress
+            bindings = <&mo2_f15_macro>, <&kp>;
         };
         
         // BACKSPACE by default but SHIFT+BACKSPACE=DELETE
@@ -90,7 +114,9 @@
             keep-mods = <(MOD_RSFT)>;
         };
         
-        // CAPSLOCK on a single tap, LSHIFT on a single press and hold, and LCTRL when the tap-dance is pressed twice.
+        // CAPSLOCK on a single tap, 
+        // LSHIFT on a single press and hold, and 
+        // LCTRL when the tap-dance is pressed twice.
         td_mt: tap_dance_mod_tap {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -112,6 +138,33 @@
             #binding-cells = <0>;
         };
 
+        // For the "layer" key, it'd nice to be able to use it as either a momentary or a toggle.
+        // Configure it as a tap dance, so the first tap (or hold) is a &mo and the second tap is a &to
+        layer_td: layer_td {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo RAISE>, <&to RAISE>;
+        };
+
+        // Single tap or hold triggers lt2 space macro
+        // double tap should permanently toggle RAISE layer
+        ltd_lt2_sp: ltd_lt2_sp {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&lt2_sp 0 SPACE>, <&to RAISE>;
+        };
+
+        // Single tap or hold triggers shift
+        // double tap triggers caps
+        sh_caps: shift_caps_td {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LSHFT>, <&kp CAPS>;
+        };
+
     };
 
     keymap {
@@ -130,8 +183,8 @@
 
             bindings = <
                 &gresc       &kp N1  &kp N2    &kp N3        &kp N4        &kp N5                             &kp N6         &kp N7     &kp N8     &kp N9      &kp N0         &bspc_del
-                &mt CAPS TAB &kp Q   &kp W     &kp E         &kp R         &kp T                              &kp Y          &kp U      &kp I      &kp O       &kp P          &kp LBKT
-                &sk LSHFT    &kp A   &kp S     &kp D         &kp F         &kp G                              &kp H          &kp J      &kp K      &kp L       &kp SEMI       &mt RSHFT SQT
+                &kp TAB      &kp Q   &kp W     &kp E         &kp R         &kp T                              &kp Y          &kp U      &kp I      &kp O       &kp P          &kp LBKT
+                &sh_caps     &kp A   &kp S     &kp D         &kp F         &kp G                              &kp H          &kp J      &kp K      &kp L       &kp SEMI       &mt RSHFT SQT
                 &kp LCTRL    &kp Z   &kp X     &kp C         &kp V         &kp B        &kp CAPS  &kp K_PP    &kp N          &kp M      &kp COMMA  &mt UP DOT  &mt DOWN FSLH  &mt RCTRL RBKT
                                      &to RAISE &kp LGUI &mt LALT SPACE &lt2_sp 0 SPACE  &kp RET   &kp BSLH  &lt2_sp 0 MINUS  &kp EQUAL  &kp LEFT   &kp RIGHT
             >;
