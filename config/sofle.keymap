@@ -59,7 +59,7 @@
     };
 
     behaviors {
-        lt1_space_macro: layer1_tap_space_macro {
+        lt2_sp: layer1_tap_space_macro {
             compatible = "zmk,behavior-hold-tap";
             label = "LT1_SPACE_MACRO";
             #binding-cells = <2>;
@@ -70,7 +70,7 @@
             bindings = <&mo1_f14_macro>, <&kp>;  // Hold: macro, Tap: keypress
         };
 
-        lt2_space_macro: layer2_tap_space_macro {
+        lt2_sp: layer2_tap_space_macro {
             compatible = "zmk,behavior-hold-tap";
             label = "LT2_SPACE_MACRO";
             #binding-cells = <2>;
@@ -120,24 +120,25 @@
         default_layer {
             display-name = "default";
 
-            // ------------------------------------------------------------------------------------------------------------
-            // |  ESC    |  1  |  2  |  3  |  4  |  5   |                     |   6   |   7   |  8   |   9   |  0  | BKSPC/DEL|
-            // |  TAB    |  Q  |  W  |  E  |  R  |  T   |                     |   Y   |   U   |  I   |   O   |  P  | [        |
-            // |CAP/SHIFT|  A  |  S  |  D  |  F  |  G   |                     |   H   |   J   |  K   |   L   |  ;  | ' SHIFT  |
-            // |  CTRL   |  Z  |  X  |  C  |  V  |  B   |  MUTE |  |PLAY/PAUSE|   N   |   M   |  ,   |   .   |  /  | ] CTRL   |
-            //                 | GUI | GUI | ALT |LT1_SP| ENTER |  |    / -   |LT2_RET|   =   | LEFT | RIGHT |
+                // ----------------------------------------------------------------------------------------------------------------------------------------------------
+                // | GRAVE/ESC  |  1  |  2  |  3  |  4  |  5   |                                            |   6   |   7   |  8   |   9   |  0      | BKSPC/DEL MACRO|
+                // |MT CAPS/TAB |  Q  |  W  |  E  |  R  |  T   |                                            |   Y   |   U   |  I   |   O   |  P      |       [        |
+                // | SK SHIFT   |  A  |  S  |  D  |  F  |  G   |                                            |   H   |   J   |  K   |   L   |  ;      | MT SHIFT '     |
+                // |  CTRL      |  Z  |  X  |  C  |  V  |  B   | CAPS |                          |PLAY/PAUSE|   N   |   M   |  ,   |MT UP. |MT DOWN/ | MT CTRL ]      |
+                //                 | RAISE | GUI | MT ALT/SPACE|LT2_SP|                          |   ENTER  |   \   |LT2 -_ |   =  | LEFT  | RIGHT   |
+                // ----------------------------------------------------------------------------------------------------------------------------------------------------
 
             bindings = <
-&kp ESCAPE  &kp N1  &kp N2    &kp N3        &kp N4              &kp N5                                                         &kp N6                   &kp N7     &kp N8     &kp N9     &kp N0    &bspc_del
-&kp TAB     &kp Q   &kp W     &kp E         &kp R               &kp T                                                          &kp Y                    &kp U      &kp I      &kp O      &kp P     &kp LEFT_BRACKET
-&td_mt     &kp A   &kp S     &kp D         &kp F               &kp G                                                          &kp H                    &kp J      &kp K      &kp L      &kp SEMI  &mt RIGHT_SHIFT SINGLE_QUOTE
-&kp LCTRL   &kp Z   &kp X     &kp C         &kp V               &kp B                     &kp C_MUTE    &kp K_PLAY_PAUSE       &kp N                    &kp M      &kp COMMA  &kp DOT    &kp FSLH  &mt RCTRL RIGHT_BRACKET
-                    &kp LGUI  &kp LEFT_GUI  &mt LEFT_ALT SPACE  &lt1_space_macro 0 SPACE  &kp RET       &mt BACKSLASH MINUS    &lt2_space_macro 0 RET   &kp EQUAL  &kp LEFT   &kp RIGHT
+                &gresc       &kp N1  &kp N2    &kp N3        &kp N4        &kp N5                             &kp N6         &kp N7     &kp N8     &kp N9      &kp N0         &bspc_del
+                &mt CAPS TAB &kp Q   &kp W     &kp E         &kp R         &kp T                              &kp Y          &kp U      &kp I      &kp O       &kp P          &kp LBKT
+                &sk LSHFT    &kp A   &kp S     &kp D         &kp F         &kp G                              &kp H          &kp J      &kp K      &kp L       &kp SEMI       &mt RSHFT SQT
+                &kp LCTRL    &kp Z   &kp X     &kp C         &kp V         &kp B        &kp CAPS  &kp K_PP    &kp N          &kp M      &kp COMMA  &mt UP DOT  &mt DOWN FSLH  &mt RCTRL RBKT
+                                     &to RAISE &kp LGUI &mt LALT SPACE &lt2_sp 0 SPACE  &kp RET   &kp BSLH  &lt2_sp 0 MINUS  &kp EQUAL  &kp LEFT   &kp RIGHT
             >;
 
-        sensor-bindings =
-                <&inc_dec_kp TAB LS(TAB)>,
-                <&inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings =
+                <&inc_dec_kp END HOME>,
+                <&inc_dec_kp DOWN UP>;      
         };
 
         lower_layer {
@@ -152,35 +153,41 @@
             //               |     |      |      |      |        |  |       |      |       |       |      |
 
             bindings = <
-&none      &kp F1     &kp F2     &kp F3    &kp F4    &kp F5                     &kp F6     &kp F7    &kp F8     &kp F9     &kp F10   &kp F11
-&kp GRAVE  &kp N1     &kp N2     &kp N3    &kp N4    &kp N5                     &kp N6     &kp N7    &kp N8     &kp N9     &kp N0    &kp F12
-&none      &kp EXCL   &kp AT     &kp HASH  &kp DLLR  &kp PRCNT                  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR   &kp RPAR  &kp PIPE
-&none      &kp EQUAL  &kp MINUS  &kp PLUS  &kp LBRC  &kp RBRC   &none    &none  &kp LBKT   &kp RBKT  &kp SEMI   &kp COLON  &kp BSLH  &none
-                      &none      &none     &none     &none      &none    &none  &none      &none     &none      &none
+                &none      &kp F1     &kp F2     &kp F3    &kp F4    &kp F5                     &kp F6     &kp F7    &kp F8     &kp F9     &kp F10   &kp F11
+                &kp GRAVE  &kp N1     &kp N2     &kp N3    &kp N4    &kp N5                     &kp N6     &kp N7    &kp N8     &kp N9     &kp N0    &kp F12
+                &none      &kp EXCL   &kp AT     &kp HASH  &kp DLLR  &kp PRCNT                  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR   &kp RPAR  &kp PIPE
+                &none      &kp EQUAL  &kp MINUS  &kp PLUS  &kp LBRC  &kp RBRC   &none    &none  &kp LBKT   &kp RBKT  &kp SEMI   &kp COLON  &kp BSLH  &none
+                                    &none      &none     &none     &none      &none    &none  &none      &none     &none      &none
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings =
+                <&inc_dec_kp TAB LS(TAB)>,
+                <&inc_dec_kp PG_UP PG_DN>;
+
         };
 
         raise_layer {
             display-name = "raise";
 
-            // ------------------------------------------------------------------------------------------------------------
-            // |       |      |      |       |       |      |                |      |      |       |      |       |       |
-            // |       | INS  | PSCR | GUI   |       |      |                | PGUP |      |   ^   |      |       |       |
-            // |       | ALT  | CTRL | SHIFT |       | CAPS |                | PGDN |   <- |   v   |  ->  |  DEL  | BKSPC |
-            // |       | UNDO | CUT  | COPY  | PASTE |      |      |  |      |      |      |       |      |       |       |
-            //                |      |       |       |      |      |  |      |      |      |       |      |
+                // ------------------------------------------------------------------------------------------------------------------------------
+                // | TL L0 |  F1  |  F2  |  F3   |  F4   |  F5  |                                |       |Sh home| alt up |SH END| CTDEL | BKSPC |
+                // | CAPS  |  F6  |  F7  |  F8   |  F9   | F10  |                                | PGUP  | HOME  |   ^    |  END |  F11  |  F12  |
+                // |       |  ALT | CTRL | SHIFT | UNDO  | REDO |                                | PGDN  |   <-  |   v    |  ->  |  DEL  | SHIFT |
+                // |       |      | CUT  | COPY  | PASTE | FIND |      |                   |TL L0|REPLACE| CtSh<-|alt down|CtSh->|       |       |
+                //                |      |       |       | SPACE| ENTER|                   |ENTER|SPACE  |       |        |       |      |
+                // ------------------------------------------------------------------------------------------------------------------------------
 
             bindings = <
-&none  &none       &none      &none        &none        &none                     &none      &none                   &none     &none              &none    &none
-&none  &kp INS     &kp PSCRN  &kp K_CMENU  &none        &none                     &kp PG_UP  &kp HOME                &kp UP    &kp END            &kp N0   &none
-&none  &kp LALT    &kp LCTRL  &kp LSHFT    &none        &kp CLCK                  &kp PG_DN  &kp LEFT                &kp DOWN  &kp RIGHT          &kp DEL  &kp BSPC
-&none  &kp K_UNDO  &kp K_CUT  &kp K_COPY   &kp K_PASTE  &none     &none    &none  &none      &kp LC(LS(LEFT_ARROW))  &none     &kp RC(RS(RIGHT))  &none    &none
-                   &none      &none        &none        &none     &none    &none  &none      &none                   &none     &none
+                &to BASE  &kp F1    &kp F2     &kp F3       &kp F4       &kp F5                        &none      &kp LS(HOME)      &kp LA(UP)    &kp LS(END)        &kp LC(DEL)   &kp BSPC
+                &kp CAPS  &kp F6    &kp F7     &kp F8       &kp F9       &kp F10                       &kp PG_UP  &kp HOME          &kp UP        &kp END            &kp F11       &kp F12
+                &none     &kp LALT  &kp LCTRL  &kp LSHFT    &kp LC(Z)    &kp LC(Y)                     &kp PG_DN  &kp LEFT          &kp DOWN      &kp RIGHT          &kp DEL       &kp RSHFT
+                &none     &none     &kp LC(X)  &kp LC(C)    &kp LC(V)    &kp LS(F)  &none    &to BASE  &kp LS(H)  &kp LC(LS(LEFT))  &kp LA(DOWN)  &kp LC(LS(RIGHT))  &none         &none
+                                    &none      &none        &none        &kp SPC    &kp RET  &kp RET   &kp SPC    &none             &none     &none
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = 
+                <&inc_dec_kp C_VOL_UP C_VOL_DN>,
+                <&inc_dec_kp K_NEXT K_PREV>;
         };
 
         adjust_layer {
@@ -193,11 +200,11 @@
 
             display-name = "adjust";
             bindings = <
-&bt BT_CLR         &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &bt BT_SEL 4                               &none  &none  &none  &none  &none  &none
-&ext_power EP_TOG  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI  &rgb_ug RGB_EFF                            &none  &none  &none  &none  &none  &none
-&none              &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none            &none            &none                                      &none  &none  &none  &none  &none  &none
-&none              &none            &none            &none            &none            &none            &rgb_ug RGB_TOG    &none  &none  &none  &none  &none  &none  &none
-                                    &none            &none            &none            &none            &none              &none  &none  &none  &none  &none
+                &bt BT_CLR         &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2     &bt BT_SEL 3     &bt BT_SEL 4                               &none  &none  &none  &none  &none  &none
+                &ext_power EP_TOG  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI  &rgb_ug RGB_EFF                            &none  &none  &none  &none  &none  &none
+                &none              &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none            &none            &none                                      &none  &none  &none  &none  &none  &none
+                &none              &none            &none            &none            &none            &none            &rgb_ug RGB_TOG    &none  &none  &none  &none  &none  &none  &none
+                                                    &none            &none            &none            &none            &none              &none  &none  &none  &none  &none
             >;
         };
 
