@@ -27,7 +27,7 @@
         };
     };
 
-    macros {
+   macros {
         // used in a hold-tap behaviour below 
         // to send a normal key when tapped 
         // but sends this macro on hold
@@ -35,12 +35,11 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = 
-                <&macro_press>,
-                <&mo LOWER &kp F14>,
+                <&macro_press &mo LOWER>,
+                <&macro_press &kp F14>,
                 <&macro_pause_for_release>,
-                <&macro_release>,
-                <&mo LOWER &kp F14>;
-
+                <&macro_release &kp F14>,
+                <&macro_release &mo LOWER>;
             label = "MO1_F14";
         };
 
@@ -48,16 +47,16 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = 
-                <&macro_press>,
-                <&mo RAISE &kp F15>,
+                <&macro_press &mo RAISE>,
+                <&macro_press &kp F15>,
                 <&macro_pause_for_release>,
-                <&macro_release>,
-                <&mo RAISE &kp F15>;
-
+                <&macro_release &kp F15>,
+                <&macro_release &mo RAISE>;
             label = "MO2_F15";
         };
 
-        mo1_f14_toggle: mo1_f14_toggle {
+
+        mo1_f14_taponce: mo1_f14_taponce {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = 
@@ -66,10 +65,10 @@
                 <&macro_pause_for_release>,
                 <&macro_release &mo LOWER>,
                 <&macro_tap &kp F14>;
-            label = "MO1_F14_toggle";
+            label = "MO1_F14_taponce";
         };
 
-        mo2_f15_toggle: mo2_f15_toggle {
+        mo2_f15_taponce: mo2_f15_taponce {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = 
@@ -85,7 +84,7 @@
     behaviors {
         lt1_sp: layer1_tap_space_macro {
             compatible = "zmk,behavior-hold-tap";
-            label = "LT1_SPACE_MACRO";
+            label = "LT1_SPACE";
             #binding-cells = <2>;
             flavor = "tap-preferred";     // Prioritize tap for quick presses
             tapping-term-ms = <200>;      // 200ms threshold for tap vs. hold
@@ -96,7 +95,7 @@
 
         lt2_sp: layer2_tap_space_macro {
             compatible = "zmk,behavior-hold-tap";
-            label = "LT2_SPACE_MACRO";
+            label = "LT2_SPACE";
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
@@ -150,6 +149,7 @@
         // Single tap or hold triggers lt2 space macro
         // double tap should permanently toggle RAISE layer
         ltd_lt2_sp: ltd_lt2_sp {
+            label = "LTD_LT2_SPACE";
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
@@ -159,6 +159,7 @@
         // Single tap or hold triggers shift
         // double tap triggers caps
         sh_caps: shift_caps_td {
+            label = "shift_caps_td";
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
